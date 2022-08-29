@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Topbar />
-    <MyMain />
+    <Topbar @getMusicGenre= "ciao" />
+    <MyMain  />
   </div>
 </template>
 
@@ -13,10 +13,27 @@ import MyMain from "./components/myMain.vue";
 
 export default {
   name: 'App',
+  props: {
+    musicGenre: String
+  },
   components: {
     Topbar,
     MyMain
+},
+
+data() {
+  return {
+    newGenres: 'placeGenre'
+  }
+},
+
+methods: {
+
+myGenre(genre){
+    this.newGenres = genre 
 }
+}
+
 }
 </script>
 

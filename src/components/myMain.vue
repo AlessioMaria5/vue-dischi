@@ -6,11 +6,10 @@
             <div class="myCover">
                 <img :src="mySongs[index].poster">
             </div>
-           
-
                 <h1>{{mySongs[index].title}}</h1>
                 <h3>{{mySongs[index].author}}</h3>
                 <h4>{{mySongs[index].year}}</h4>
+                
             
         </div>
     </div>
@@ -29,6 +28,7 @@ export default {
 
             mySongs: [],
             myApi: 'https://flynn.boolean.careers/exercises/api/array/music'
+            
         }
     },
 
@@ -40,12 +40,13 @@ export default {
 
         getSongs(){
             let that = this
-            axios.get(this.myApi)
-            .then(function (response){
-               that.mySongs = response.data.response
-               for(let i = 0 ; i < 10 ; i++){
-                console.log(that.mySongs[i].author)
-               }
+                axios.get(this.myApi)
+                .then(function (response){
+                that.mySongs = response.data.response
+                that.$emit('getMusicGenre', response.data.response)
+                for(let i = 0 ; i < 10 ; i++){
+                    console.log(that.mySongs[i].author)
+                }
                
                 
             })
