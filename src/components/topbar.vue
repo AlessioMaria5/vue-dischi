@@ -2,8 +2,8 @@
   <div class="topbar">
       <p>Spotify</p>
       <div class="selectionGenre">
-    <select name="myGenre" id="myGenre">
-      <option value="we">{{Genre}}</option>
+    <select @change="$emit('changedGenre', filteredGenre)"  v-model="filteredGenre">
+      <option v-for="(genre, index) in genreList"  :key="index" :value="genre">{{genre}}</option>
     </select>
   </div>
   </div>
@@ -11,11 +11,20 @@
 
 <script>
 export default {
-    name: 'myTopbar',
-    props: {
-      Genre: String
+
+  name: 'myTopbar',
+  props: {
+    genreList: Array
+  },
+
+  data() {
+    return {
+      filteredGenre: ''
     }
-}
+  },
+} 
+
+
 </script>
 
 <style lang="scss">

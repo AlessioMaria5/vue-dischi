@@ -27,13 +27,44 @@ export default {
         return {
 
             mySongs: [],
-            myApi: 'https://flynn.boolean.careers/exercises/api/array/music'
+            myApi: 'https://flynn.boolean.careers/exercises/api/array/music',
+            genres: [],
             
         }
     },
 
+    props: {
+
+        genreFromHeader: String
+    },
+
     created() {
         this.getSongs();
+
+        axios.get(this.myApi)
+        .then((res) => {
+            this.mySongs = res.data.response
+            this.mySongs.forEach(mySongs => {
+                if (!this.genres.includes(mySongs.genre)){
+                    this.genres.push(mySongs.genre);                   
+                }
+
+        
+            })
+            this.$emit('genresReady', this.genres)    
+        })
+
+    },
+
+    computed: {
+
+        filteredMusic(){
+
+            axios.get(this.myApi)
+            .then( res => {
+                this.mySongs = res.data.response
+            })           
+        }
     },
 
     methods: { 
@@ -43,12 +74,6 @@ export default {
                 axios.get(this.myApi)
                 .then(function (response){
                 that.mySongs = response.data.response
-                that.$emit('getMusicGenre', response.data.response)
-                for(let i = 0 ; i < 10 ; i++){
-                    console.log(that.mySongs[i].author)
-                }
-               
-                
             })
         }
     

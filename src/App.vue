@@ -1,39 +1,38 @@
 <template>
   <div id="app">
-    <Topbar @getMusicGenre= "ciao" />
-    <MyMain  />
+    <MyTopBar @changedGenre="startSearch" :genreList= "genreList" />
+    <MyMain @genresReady="myGenre"  :genreFromHeader = "genreFromHeader"/>
   </div>
 </template>
 
 <script>
-import Topbar from "./components/topbar.vue";
+import MyTopBar from "./components/topbar.vue";
 import MyMain from "./components/myMain.vue";
 
 
 
 export default {
   name: 'App',
-  props: {
-    musicGenre: String
-  },
   components: {
-    Topbar,
+    MyTopBar,
     MyMain
 },
-
 data() {
   return {
-    newGenres: 'placeGenre'
+    genreList: [],
+    genreFromHeader: ''
   }
 },
 
 methods: {
 
-myGenre(genre){
-    this.newGenres = genre 
-}
-}
-
+myGenre(allGenres){
+  this.genreList = allGenres;
+    },
+    startSearch(genreRecived){
+      this.genreFromHeader = genreRecived; 
+    }
+  }
 }
 </script>
 
