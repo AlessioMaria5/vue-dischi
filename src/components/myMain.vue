@@ -66,13 +66,12 @@ export default {
             } else {
                 const filteredSongs = this.mySongs.filter(song => {
                     if(song.genre == this.genreFromHeader) {
-                        console.log(song)
-                        return true
+                        return true 
                     } else {
                         return false
                     }
                 })
-                return filteredSongs  
+                return this.mySongs = filteredSongs
             }
             }    
         },
