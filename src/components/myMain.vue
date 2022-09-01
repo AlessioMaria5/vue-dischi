@@ -20,6 +20,7 @@
 import axios from 'axios';
 
 
+
 export default {
     name: 'myMain',
 
@@ -29,6 +30,7 @@ export default {
             mySongs: [],
             myApi: 'https://flynn.boolean.careers/exercises/api/array/music',
             genres: [],
+            filteredSongs: []
             
         }
     },
@@ -58,14 +60,23 @@ export default {
 
     computed: {
 
-        filteredMusic(){
-
-            axios.get(this.myApi)
-            .then( res => {
-                this.mySongs = res.data.response
-            })           
-        }
-    },
+        filteredMusic(){ 
+            if(this.genreFromHeader == ''){
+                return this.mySongs
+            } else {
+                const filteredSongs = this.mySongs.filter(song => {
+                    if(song.genre == this.genreFromHeader) {
+                        console.log(song)
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+                return filteredSongs  
+            }
+            }    
+        },
+    
 
     methods: { 
 

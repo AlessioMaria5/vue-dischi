@@ -17,6 +17,7 @@ export default {
     MyTopBar,
     MyMain
 },
+
 data() {
   return {
     genreList: [],
